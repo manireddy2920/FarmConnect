@@ -193,9 +193,19 @@ export default function ShopPage() {
           </div>
         ) : filtered.length > 0 ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filtered.map(product => (
-              <ProductCard key={product._id} product={product} />
-            ))}
+            {filtered.map(product => {
+              const farmerObj = typeof product.farmer_id === 'object' && product.farmer_id !== null
+                ? product.farmer_id
+                : null;
+              const normalised = {
+                ...product,
+                farmer_id: farmerObj?._id ?? (product.farmer_id as string) ?? '',
+                farmer_name: product.farmer_name ?? farmerObj?.name ?? 'Farmer',
+                carbon_saved_per_kg: (product as any).carbon_saved_per_kg ?? 0.21,
+                blockchain_hash: (product as any).blockchain_hash ?? '',
+              };
+              return <ProductCard key={product._id} product={normalised} />;
+            })}
           </div>
         ) : (
           <div className="text-center py-20 text-gray-400">
