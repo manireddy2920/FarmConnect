@@ -69,24 +69,30 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right: image grid — 2×2, perfectly aligned */}
-          <div className="hidden md:grid grid-cols-2 gap-4 h-[420px]">
-            {heroImages.map((img, i) => (
-              <div
-                key={i}
-                className={`relative rounded-2xl overflow-hidden shadow-xl ${
-                  i % 2 === 0 ? 'mt-6' : 'mb-6'
-                }`}
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover"
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                />
+          {/* Right: image grid — 2 columns, top row shorter, bottom row taller */}
+          <div className="hidden md:flex gap-4 h-[440px]">
+            {/* Column 1 */}
+            <div className="flex flex-col gap-4 flex-1 pt-8">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl flex-1">
+                <img src={heroImages[0].src} alt={heroImages[0].alt} className="w-full h-full object-cover" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
               </div>
-            ))}
+              <div className="relative rounded-2xl overflow-hidden shadow-xl flex-[1.4]">
+                <img src={heroImages[2].src} alt={heroImages[2].alt} className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+            </div>
+            {/* Column 2 */}
+            <div className="flex flex-col gap-4 flex-1 pb-8">
+              <div className="relative rounded-2xl overflow-hidden shadow-xl flex-[1.4]">
+                <img src={heroImages[1].src} alt={heroImages[1].alt} className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+              <div className="relative rounded-2xl overflow-hidden shadow-xl flex-1">
+                <img src={heroImages[3].src} alt={heroImages[3].alt} className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
